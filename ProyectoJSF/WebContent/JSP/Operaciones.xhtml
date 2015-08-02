@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<div align="center">
+		<br /> <br />
+		<h1>Gestiòn de Matrices</h1>
+		<br /> <br />
+		<h:form title="Matrices" id="matriz">
+		<p:growl showDetail="true" sticky="false" life="4000"
+								severity="info,warn,error,fatal" />
+			<p:panelGrid columns="2">
+				<label>Operaciòn</label>
+				<p:selectOneMenu value="#{matrizBean.tipoOperacion}">
+					<f:selectItem itemLabel="---" />
+					<f:selectItems value="#{matrizBean.opracionesItem}" />
+					<p:ajax listener="#{matrizBean.valueChange}" event="change"
+						update="matriz" />
+				</p:selectOneMenu>
+			</p:panelGrid>
+			<br />
+			<br />
+			<p:panelGrid columns="7">
+				<label>Parametros</label>
+				<p:inputText value="#{matrizBean.param1}" title="Parametro 1"
+					size="2">
+					<f:validateDoubleRange minimum="0" maximum="#{matrizBean.indices}"/>
+				</p:inputText>
+				<p:inputText value="#{matrizBean.param2}" title="Parametro 2"
+					size="2">
+					<f:validateDoubleRange minimum="0" maximum="#{matrizBean.indices}"/>
+				</p:inputText>
+				<p:inputText value="#{matrizBean.param3}" title="Parametro 3"
+					size="2">
+					<f:validateDoubleRange minimum="0" maximum="#{matrizBean.indices}"/>
+				</p:inputText>
+				<p:inputText value="#{matrizBean.param4}" title="Parametro 4"
+					size="2">
+					<f:validateDoubleRange minimum="0" maximum="#{matrizBean.indices}"/>
+				</p:inputText>
+				<p:inputText value="#{matrizBean.param5}" title="Parametro 5"
+					size="2" rendered="#{matrizBean.parametros}">
+					<f:validateDoubleRange minimum="0" maximum="#{matrizBean.indices}"/>
+				</p:inputText>
+				<p:inputText value="#{matrizBean.param6}" title="Parametro 6"
+					size="2" rendered="#{matrizBean.parametros}">
+					<f:validateDoubleRange minimum="0" maximum="#{matrizBean.indices}"/>
+				</p:inputText>
+			</p:panelGrid>
+			<br />
+			<br />
+			<p:panelGrid columns="1">
+				<label>Resultado</label>
+				<h:outputText value="#{matrizBean.suma}" id="result">
+
+				</h:outputText>
+			</p:panelGrid>
+			<br />
+			<br />
+			<p:commandButton value="Aceptar" action="#{matrizBean.accion}"
+				update="matriz" />
+		</h:form>
+	</div>
+</body>
+</html>
